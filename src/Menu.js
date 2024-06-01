@@ -1,23 +1,40 @@
 import React from 'react';
 
-const Menu = ({ items }) => {
+const Menu = ({ item, setDataa }) => {
+  const handleRemove = (id) => {
+    const remove = item.filter((item) => {
+      return item.id !== id;
+    });
+    setDataa(remove);
+  };
   return (
     <div className='section-center'>
-      {items.map((menuItem) => {
-        const { id, title, category, price, img, desc } = menuItem;
+      {item.map((single) => {
+        const { desc, id, img, price, title } = single;
         return (
-          <article className='menu-item' key={id}>
+          <article key={id} className='menu-item'>
             <img src={img} alt={title} className='photo' />
             <div className='item-info'>
               <header>
                 <h4>{title}</h4>
-                <h4 className='price'> ${price}</h4>
+                <h4 className='price'>${price}</h4>
               </header>
               <p className='item-text'>{desc}</p>
             </div>
+            <button onClick={() => handleRemove(id)} className='filter-btn'>
+              not Interested
+            </button>
           </article>
         );
       })}
+      {item.length !== 0 ? undefined : (
+        <button
+          className='filter-btn'
+          onClick={() => window.location.reload(true)}
+        >
+          Show All
+        </button>
+      )}
     </div>
   );
 };
