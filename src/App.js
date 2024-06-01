@@ -3,33 +3,33 @@ import Menu from './Menu';
 import Categories from './Categories';
 import items from './data';
 
-const allCategories = ['all', ...new Set(items.map((item) => item.category))];
+const allCatogeries = items.map((item) => item.category);
+const Unique = ['all', ...new Set(allCatogeries)];
 
 function App() {
-  const [menuItems, setMenuItems] = useState(items);
-  const [categories, setCategories] = useState(allCategories);
-  const filterItems = (category) => {
+  const [dataa, setDataa] = useState(items);
+  const [btn, setBtn] = useState(Unique);
+
+  const showItem = (category) => {
     if (category === 'all') {
-      setMenuItems(items);
+      setDataa(items);
       return;
     }
-    const newItems = items.filter((item) => item.category === category);
-    setMenuItems(newItems);
-  };
 
+    const newButton = items.filter((item) => {
+      return item.category === category;
+    });
+    setDataa(newButton);
+  };
   return (
     <main>
       <section className='menu section'>
         <div className='title'>
-          <h2> Our Menu</h2>
+          <h2>menus</h2>
           <div className='underline'></div>
         </div>
-        <Categories
-          filterItems={filterItems}
-          {...filterItems}
-          categories={categories}
-        />
-        <Menu items={menuItems} {...menuItems} />
+        <Categories showItem={showItem} btn={btn} />
+        <Menu item={dataa} setDataa={setDataa} />
       </section>
     </main>
   );
