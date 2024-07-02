@@ -21,7 +21,7 @@ const Menu = ({ item, setDataa }) => {
               </header>
               <p className='item-text'>{desc}</p>
             </div>
-            <button onClick={() => handleRemove(id)} className='filter-btn'>
+            <button onClick={() => handleRemove(id)} className='filter-btn mar'>
               not Interested
             </button>
           </article>
